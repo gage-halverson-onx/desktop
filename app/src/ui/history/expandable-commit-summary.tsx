@@ -308,7 +308,7 @@ export class ExpandableCommitSummary extends React.Component<
   }
 
   private renderDescription() {
-    if (this.state.body.length === 0 || this.props.selectedCommits.length > 1) {
+    if (this.state.body.length === 0) {
       return null
     }
 
@@ -435,11 +435,7 @@ export class ExpandableCommitSummary extends React.Component<
   }
 
   private renderAuthors = () => {
-    const { selectedCommits, isExpanded } = this.props
-    if (selectedCommits.length > 1) {
-      return
-    }
-
+    const { isExpanded } = this.props
     return (
       <div className="ecs-meta-item authors">
         {isExpanded ? this.renderAuthorList() : this.renderAuthorStack()}
@@ -488,7 +484,7 @@ export class ExpandableCommitSummary extends React.Component<
 
     return (
       <>
-        Showing changes from{' '}
+        Showing changes from this one{' '}
         {commitsNotInDiff > 0 ? (
           <LinkButton
             className="commits-in-diff"
@@ -523,10 +519,6 @@ export class ExpandableCommitSummary extends React.Component<
   }
 
   private renderMetaItems = () => {
-    if (this.props.selectedCommits.length > 1) {
-      return null
-    }
-
     return (
       <div className="ecs-meta">
         {this.renderAuthors()}
@@ -555,13 +547,10 @@ export class ExpandableCommitSummary extends React.Component<
   }
 
   private renderLinesChanged() {
-    const { changesetData, selectedCommits, isExpanded } = this.props
+    const { changesetData, isExpanded } = this.props
     const { linesAdded, linesDeleted } = changesetData
 
-    if (
-      (linesAdded === 0 && linesDeleted === 0) ||
-      selectedCommits.length > 1
-    ) {
+    if (linesAdded === 0 && linesDeleted === 0) {
       return null
     }
 
