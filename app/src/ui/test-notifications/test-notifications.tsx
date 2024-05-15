@@ -15,7 +15,6 @@ import {
   DialogFooter,
   OkCancelButtonGroup,
 } from '../dialog'
-import { DialogHeader } from '../dialog/header'
 import { Dispatcher } from '../dispatcher'
 import { Button } from '../lib/button'
 import { RowIndexPath } from '../lib/list/list-row-index-path'
@@ -132,7 +131,7 @@ class TestNotificationItemRowContent extends React.Component<{
         <div className="main-content">{children}</div>
         {html_url && (
           <div className="right-accessory">
-            <Button onClick={this.onExternalLinkClick}>
+            <Button onClick={this.onExternalLinkClick} role="link">
               <Octicon symbol={octicons.linkExternal} />
             </Button>
           </div>
@@ -735,16 +734,10 @@ export class TestNotifications extends React.Component<
     return (
       <Dialog
         id="test-notifications"
+        title="Test Notifications"
         onSubmit={this.props.onDismissed}
-        dismissable={true}
         onDismissed={this.props.onDismissed}
       >
-        <DialogHeader
-          title="Test Notifications"
-          dismissable={true}
-          onDismissed={this.props.onDismissed}
-        />
-
         <DialogContent>
           <p>{this.renderNotificationHint()}</p>
           {this.renderCurrentStep()}

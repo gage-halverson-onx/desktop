@@ -72,6 +72,8 @@ interface IBranchDropdownProps {
    * using the dialog focus management.
    */
   readonly enableFocusTrap: boolean
+
+  readonly underlineLinks: boolean
 }
 
 /**
@@ -101,6 +103,7 @@ export class BranchDropdown extends React.Component<IBranchDropdownProps> {
         emoji={this.props.emoji}
         onDeleteBranch={this.onDeleteBranch}
         onRenameBranch={this.onRenameBranch}
+        underlineLinks={this.props.underlineLinks}
       />
     )
   }
@@ -362,7 +365,7 @@ export class BranchDropdown extends React.Component<IBranchDropdownProps> {
     )
   }
 
-  private onBadgeRef = (ref: HTMLSpanElement | null) => {
+  private onBadgeRef = (ref: HTMLButtonElement | null) => {
     this.badgeRef = ref
   }
 
@@ -380,6 +383,7 @@ export class BranchDropdown extends React.Component<IBranchDropdownProps> {
         repository={pr.base.gitHubRepository}
         onBadgeRef={this.onBadgeRef}
         onBadgeClick={this.onBadgeClick}
+        showCIStatusPopover={this.props.showCIStatusPopover}
       />
     )
   }

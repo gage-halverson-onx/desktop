@@ -32,6 +32,8 @@ interface IPullRequestCommentLikeProps {
 
   readonly switchingToPullRequest: boolean
 
+  readonly underlineLinks: boolean
+
   readonly renderFooterContent: () => JSX.Element
 
   readonly onSubmit: () => void
@@ -51,8 +53,7 @@ export abstract class PullRequestCommentLike extends React.Component<IPullReques
       <div className="pull-request-comment-like-dialog-header">
         {this.renderPullRequestIcon()}
         <span className="pr-title">
-          <span className="pr-title">{title}</span>{' '}
-          <span className="pr-number">#{pullRequestNumber}</span>{' '}
+          {title} <span className="pr-number">#{pullRequestNumber}</span>{' '}
         </span>
       </div>
     )
@@ -62,7 +63,7 @@ export abstract class PullRequestCommentLike extends React.Component<IPullReques
         id={this.props.id}
         type="normal"
         title={header}
-        dismissable={false}
+        backdropDismissable={false}
         onSubmit={this.props.onSubmit}
         onDismissed={this.props.onDismissed}
         loading={this.props.switchingToPullRequest}
@@ -173,6 +174,8 @@ export abstract class PullRequestCommentLike extends React.Component<IPullReques
         repository={base.gitHubRepository}
         onMarkdownLinkClicked={this.onMarkdownLinkClicked}
         markdownContext={'PullRequestComment'}
+        underlineLinks={this.props.underlineLinks}
+        ariaLabel="Pull request markdown comment"
       />
     )
   }
